@@ -261,7 +261,7 @@ Example:
 </tr>
 <tr>
   <td>
-    --modulesDir=VALUE
+    --modulesDir
   </td>
   <td>
 Directory path of the module manifest files. The manifest files are processed
@@ -1107,7 +1107,7 @@ used for the <code>disk/du</code> isolator. (default: 15secs)
 </tr>
 <tr>
   <td>
-    --[no-]enforce_container_disk_quota
+    --[no]enforce_container_disk_quota
   </td>
   <td>
 Whether to enable disk quota enforcement for containers. This flag
@@ -1440,6 +1440,16 @@ Path to find Hadoop installed (for
 fetching framework executors from HDFS)
 (no default, look for <code>HADOOP_HOME</code> in
 environment or find hadoop on <code>PATH</code>) (default: )
+  </td>
+</tr>
+<tr>
+  <td>
+    --[no]authenticate_http
+  </td>
+  <td>
+If <code>true</code>, only authenticated requests for HTTP endpoints supporting
+authentication are allowed. If <code>false</code>, unauthenticated requests to
+HTTP endpoints are also allowed. (default: false)
   </td>
 </tr>
 <tr>
