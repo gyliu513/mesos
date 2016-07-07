@@ -259,6 +259,16 @@ Example:
 }</code></pre>
   </td>
 </tr>
+<tr>
+  <td>
+    --modulesDir
+  </td>
+  <td>
+Directory path of the module manifest files. The manifest files are processed
+in alphabetical order. (See --modules for more information on module manifest
+files). Cannot be used in conjunction with --modules.
+  </td>
+</tr>
 </table>
 
 *These logging options can also be supplied to both masters and agents.*
@@ -493,12 +503,37 @@ load an alternate allocator module using <code>--modules</code>.
 </tr>
 <tr>
   <td>
+    --fair_sharing_excluded_resource_names=VALUE
+  </td>
+  <td>
+A comma-separated list of the resource names (e.g. 'gpus')
+that will be excluded from fair sharing constraints.
+This may be useful in cases where the fair sharing
+implementation currently has limitations. E.g. See the
+problem of "scarce" resources:
+  http://www.mail-archive.com/dev@mesos.apache.org/msg35631.html
+  https://issues.apache.org/jira/browse/MESOS-5377
+  </td>
+</tr>
+<tr>
+  <td>
     --[no-]authenticate
   </td>
   <td>
 If <code>true</code>, only authenticated frameworks are allowed to register. If
 <code>false</code>, unauthenticated frameworks are also allowed to register. For
 HTTP based frameworks use the <code>--authenticate_http_frameworks</code> flag. (default: false)
+  </td>
+</tr>
+<tr>
+  <td>
+    --[no-]authenticate_frameworks
+  </td>
+  <td>
+If <code>true</code>, only authenticated frameworks are allowed to register.
+If <code>false</code>, unauthenticated frameworks are also allowed to register.
+For HTTP based frameworks use the <code>--authenticate_http_frameworks</code>
+flag. (default: false)
   </td>
 </tr>
 <tr>
@@ -598,6 +633,26 @@ Maximum number of completed frameworks to store in memory. (default: 50)
   </td>
   <td>
 Maximum number of completed tasks per framework to store in memory. (default: 1000)
+  </td>
+</tr>
+<tr>
+  <td>
+    --master_contender=VALUE
+  </td>
+  <td>
+The symbol name of the master contender to use. This symbol should exist in a
+module specified through the --modules flag. Cannot be used in conjunction with
+--zk. Must be used in conjunction with --master_detector.
+  </td>
+</tr>
+<tr>
+  <td>
+    --master_detector=VALUE
+  </td>
+  <td>
+The symbol name of the master detector to use. This symbol should exist in a
+module specified through the --modules flag. Cannot be used in conjunction with
+--zk. Must be used in conjunction with --master_contender.
   </td>
 </tr>
 <tr>
@@ -1052,6 +1107,15 @@ used for the <code>disk/du</code> isolator. (default: 15secs)
 </tr>
 <tr>
   <td>
+    --[no]enforce_container_disk_quota
+  </td>
+  <td>
+Whether to enable disk quota enforcement for containers. This flag
+is used for the <code>disk/du</code> isolator. (default: false)
+  </td>
+</tr>
+<tr>
+  <td>
     --container_logger=VALUE
   </td>
   <td>
@@ -1380,6 +1444,16 @@ environment or find hadoop on <code>PATH</code>) (default: )
 </tr>
 <tr>
   <td>
+    --[no]authenticate_http
+  </td>
+  <td>
+If <code>true</code>, only authenticated requests for HTTP endpoints supporting
+authentication are allowed. If <code>false</code>, unauthenticated requests to
+HTTP endpoints are also allowed. (default: false)
+  </td>
+</tr>
+<tr>
+  <td>
     --http_credentials=VALUE
   </td>
   <td>
@@ -1512,6 +1586,16 @@ The agent periodically updates the master with the current estimation
 about the total amount of oversubscribed resources that are allocated
 and available. The interval between updates is controlled by this flag.
 (default: 15secs)
+  </td>
+</tr>
+<tr>
+  <td>
+    --master_detector=VALUE
+  </td>
+  <td>
+The symbol name of the master detector to use. This symbol should exist
+in a module specified through the --modules flag. Cannot be used in conjunction
+with --master.
   </td>
 </tr>
 <tr>
